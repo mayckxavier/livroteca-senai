@@ -1,21 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
-<EditText
-    android:id="@+id/editText"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:hint="Digite aqui o seu nome, seu sambanga!"
-    />
+    <EditText
+        android:id="@+id/tituloLivro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Digite o nome do livro" />
 
 
-</RelativeLayout>
+    <EditText
+        android:id="@+id/autorLivro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Digite o nome do autor" />
+
+    <EditText
+        android:id="@+id/fotoLivro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Digite a url do livro" />
+
+    <EditText
+        android:id="@+id/statusLivro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Digite o status do livro" />
+
+
+    <Button
+        android:id="@+id/botaoEnviar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enviar dados" />
+
+
+</LinearLayout>
