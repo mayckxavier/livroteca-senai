@@ -24,6 +24,13 @@
         android:hint="Digite o nome do autor" />
 
     <EditText
+        android:id="@+id/editoraLivro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Digite o nome da editora" />
+
+
+    <EditText
         android:id="@+id/fotoLivro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

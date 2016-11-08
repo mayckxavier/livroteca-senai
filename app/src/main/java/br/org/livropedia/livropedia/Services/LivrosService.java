@@ -3,16 +3,23 @@ package br.org.livropedia.livropedia.Services;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
+
 //Biblioteca para requisição http
+import okhttp3.FormBody;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
+
+import static android.R.attr.password;
 
 /**
  * Created by aluno on 08/11/2016.
@@ -48,29 +55,49 @@ public class LivrosService {
 
 
     public void postLivro(final JSONObject livro) {
-        final MediaType JSON
-                = MediaType.parse("application/json; charset=utf-8");
-
         String endPoint = "create_livro.php";
         final String url = BASE_URL + endPoint;
 
         final OkHttpClient client = new OkHttpClient();
 
+        Log.e("clicando no botão","");
+
+
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-
-                RequestBody body = RequestBody.create(JSON, livro.toString());
-                Request request = new Request.Builder()
-                        .url(url)
-                        .post(body)
-                        .build();
-                Response response = null;
                 try {
+                    RequestBody formBuilder = new MultipartBody.Builder()
+                            .setType(MultipartBody.FORM)
+                            .addFormDataPart("titulo", livro.getString("titulo"))
+                            .addFormDataPart("autor", livro.getString("autor"))
+                            .addFormDataPart("editora", livro.getString("editora"))
+                            .addFormDataPart("foto", livro.getString("foto"))
+                            .addFormDataPart("status", livro.getString("status"))
+                            .build();
+
+
+//                    FormBody.Builder formBuilder = new FormBody.Builder()
+//                            .add("titulo", livro.getString("titulo"))
+//                            .add("autor", livro.getString("autor"))
+//                            .add("editora", livro.getString("editora"))
+//                            .add("foto", livro.getString("foto"))
+//                            .add("status", livro.getString("status"));
+
+                    RequestBody body = formBuilder;
+                    Request request = new Request.Builder()
+                            .url(url)
+                            .post(body)
+                            .build();
+                    Response response = null;
+
                     response = client.newCall(request).execute();
                     Log.e("creteLivro: ", response.body().string());
                 } catch (IOException e) {
+                    Log.e("creteLivro: ", "",e);
                     e.printStackTrace();
+                } catch (JSONException e) {
+                    Log.e("creteLivro: ", "",e);
                 }
 
                 return null;
