@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                     livro.put("foto", foto.getText().toString());
                     livro.put("status", status.getText().toString());
 
-                    LivrosService livrosService = new LivrosService();
+                    LivrosService livrosService = new LivrosService(MainActivity.this);
                     livrosService.postLivro(livro);
 
                 } catch (JSONException e) {
@@ -56,7 +56,5 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        LivrosService livrosService = new LivrosService();
-        livrosService.getLivros();
     }
 }
