@@ -26,13 +26,13 @@ import static android.R.attr.password;
  */
 public class LivrosService {
 
-    private static final String BASE_URL = "http://mayckxavier.com/projetos/livropedia/";
+    private static final String BASE_URL = "http://www.mayckxavier.com/projetos/livropedia/";
 
     public void getLivros() {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                String endPoint = "get_livros.php";
+                String endPoint = "livros/get_all";
                 String url = BASE_URL + endPoint;
 
                 OkHttpClient client = new OkHttpClient();
@@ -55,49 +55,43 @@ public class LivrosService {
 
 
     public void postLivro(final JSONObject livro) {
-        String endPoint = "create_livro.php";
+        String endPoint = "livros/create";
         final String url = BASE_URL + endPoint;
+
+        final MediaType JSON
+                = MediaType.parse("application/json; charset=utf-8");
 
         final OkHttpClient client = new OkHttpClient();
 
-        Log.e("clicando no botão","");
+        Log.e("clicando no botão", "");
 
 
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
                 try {
-                    RequestBody formBuilder = new MultipartBody.Builder()
-                            .setType(MultipartBody.FORM)
-                            .addFormDataPart("titulo", livro.getString("titulo"))
-                            .addFormDataPart("autor", livro.getString("autor"))
-                            .addFormDataPart("editora", livro.getString("editora"))
-                            .addFormDataPart("foto", livro.getString("foto"))
-                            .addFormDataPart("status", livro.getString("status"))
+
+                    RequestBody formBody = new FormBody.Builder()
+                            .add("titulo", livro.getString("titulo"))
+                            .add("autor", livro.getString("autor"))
+                            .add("editora", livro.getString("editora"))
+                            .add("foto", livro.getString("foto"))
+                            .add("status", livro.getString("status"))
                             .build();
 
-
-//                    FormBody.Builder formBuilder = new FormBody.Builder()
-//                            .add("titulo", livro.getString("titulo"))
-//                            .add("autor", livro.getString("autor"))
-//                            .add("editora", livro.getString("editora"))
-//                            .add("foto", livro.getString("foto"))
-//                            .add("status", livro.getString("status"));
-
-                    RequestBody body = formBuilder;
                     Request request = new Request.Builder()
                             .url(url)
-                            .post(body)
+                            .post(formBody)
                             .build();
                     Response response = null;
 
                     response = client.newCall(request).execute();
                     Log.e("creteLivro: ", response.body().string());
                 } catch (IOException e) {
-                    Log.e("creteLivro: ", "",e);
+                    Log.e("creteLivro: ", "", e);
                     e.printStackTrace();
                 } catch (JSONException e) {
-                    Log.e("creteLivro: ", "",e);
+                    Log.e("creteLivro: ", "", e);
                 }
 
                 return null;
