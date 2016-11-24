@@ -31,16 +31,17 @@
 
 
     <EditText
-        android:id="@+id/fotoLivro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Digite a url do livro" />
-
-    <EditText
         android:id="@+id/statusLivro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Digite o status do livro" />
+
+
+    <ImageView
+        android:id="@+id/fotoLivro"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="150dp"
+        android:layout_height="150dp" />
 
 
     <Button
