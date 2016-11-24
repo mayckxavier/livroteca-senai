@@ -38,6 +38,7 @@
 
 
     <ImageView
+        android:src="@android:drawable/ic_menu_camera"
         android:id="@+id/fotoLivro"
         android:layout_gravity="center_horizontal"
         android:layout_width="150dp"
